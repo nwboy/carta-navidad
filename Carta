@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta Navideña</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scene">
+  <div class="envelope" onclick="openLetter()">
+    <div class="flap"></div>
+
+    <div class="letter">
+      <h3>Para mis seres queridos 🎄</h3>
+
+      <!-- ✍️ ESCRIBE TU MENSAJE AQUÍ -->
+      <p>
+        Dear Kevin: 
+        Esta navidad quería agradecerle por estar, por su compañia  
+        y por ese algo que solo usted tiene.  
+        ILY 🤍.
+      </p>
+
+      <span>🤍✨</span>
+    </div>
+  </div>
+
+  <p class="tap">Toca el sobre ✉️</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(#1b263b, #0d1b2a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, serif;
+}
+
+.scene {
+  text-align: center;
+}
+
+.envelope {
+  width: 280px;
+  height: 180px;
+  background: #ffffff;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #f1f1f1;
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
+  transform-origin: top;
+  transition: transform 0.8s ease;
+}
+
+.letter {
+  position: absolute;
+  bottom: -200px;
+  left: 10%;
+  width: 80%;
+  height: 200px;
+  background: #f7efe5;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  transition: bottom 1s ease;
+  border-radius: 3px;
+}
+
+.envelope.open .letter {
+  bottom: 10px;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.tap {
+  margin-top: 15px;
+  color: #e0e1dd;
+  font-size: 14px;
+}
+function openLetter() {
+  document.querySelector('.envelope').classList.toggle('open');
+}
+
+// TEXTO QUE VIENE DESDE EL LINK
+const params = new URLSearchParams(window.location.search);
+const text = params.get("msg");
+
+document.getElementById("message").innerText =
+  text || "Que esta Navidad te envuelva en calma y amor 🤍";
+
